@@ -12,7 +12,9 @@ class Heart
         void draw(sf::RenderWindow &app);
 
         void losePieceOfHeart();
+        void beatWave();
         int getCurrentHeart();
+        sf::Rect<float> getRect();
         bool isAlive();
 
     private:

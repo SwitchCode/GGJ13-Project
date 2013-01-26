@@ -14,7 +14,6 @@ class Runner
         Runner();
         bool init();
         void update(sf::Time elapsedTime);
-        bool AABBvSAABB(sf::Rect<float> rect1, sf::Rect<float> rect2);
         void draw(sf::RenderWindow &window);
 };
 

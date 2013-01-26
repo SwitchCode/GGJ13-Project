@@ -38,6 +38,12 @@ void Heart::draw(sf::RenderWindow &app)
     app.draw(_sprite[_currentHeart]);
 }
 
+void Heart::beatWave()
+{
+    //_sprite[_currentHeart].setScale(1.2f, 1.2f);
+    // do something here if you want
+}
+
 void Heart::losePieceOfHeart()
 {
     _currentHeart++;
@@ -56,4 +62,9 @@ int Heart::getCurrentHeart()
 bool Heart::isAlive()
 {
     return _isAlive;
+}
+
+sf::Rect<float> Heart::getRect()
+{
+    return _sprite[_currentHeart].getGlobalBounds();
 }
