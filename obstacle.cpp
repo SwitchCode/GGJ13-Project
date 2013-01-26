@@ -14,7 +14,7 @@ bool Obstacle::init()
     else
     {
         _sprite.setTexture(_texture);
-        _pos.x = WINDOW_WIDTH - 100;
+        _pos.x = WINDOW_WIDTH;
         _pos.y = WINDOW_HEIGHT - OBSTACLE_HEIGHT;
         return true;
     }
