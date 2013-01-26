@@ -1,6 +1,7 @@
 #include "config.hpp"
 
 #include "rythm.hpp"
+#include "runner.hpp"
 #include "game.hpp"
 
 Game::Game()
@@ -24,6 +25,9 @@ void Game::start()
 
     if(!_rythm.init())
         _gameState = Game::Exiting;
+    else if(!_runner.init())
+        _gameState = Game::Exiting;
+
 
     while(!isExiting())
     {
@@ -47,7 +51,7 @@ void Game::gameLoop()
     switch(_gameState)
     {
         case Game::Playing:
-        _mainWindow.clear();
+        _mainWindow.clear(sf::Color(255, 255, 255));
 
         updateAll();
         drawAll();
@@ -65,11 +69,13 @@ void Game::gameLoop()
 void Game::updateAll()
 {
     _rythm.update();
+    _runner.update();
 }
 
 void Game::drawAll()
 {
     _rythm.draw(_mainWindow);
+    _runner.draw(_mainWindow);
 }
 
 sf::RenderWindow& Game::getWindow()
@@ -88,3 +94,4 @@ sf::Event Game::_currentEvent;
 sf::Clock Game::_clock;
 
 Rythm Game::_rythm;
+Runner Game::_runner;

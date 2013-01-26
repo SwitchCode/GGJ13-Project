@@ -2,6 +2,7 @@
 #define GAME_HPP
 
 #include "rythm.hpp"
+#include "runner.hpp"
 
 class Game
 {
@@ -28,6 +29,7 @@ class Game
         static sf::Clock _clock;
 
         static Rythm _rythm;
+        static Runner _runner;
 };
 
 #endif
