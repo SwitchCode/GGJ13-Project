@@ -11,3 +11,8 @@
 *.lai
 *.la
 *.a
+
+*.dll
+*.cbp
+bin/
+*.depend
