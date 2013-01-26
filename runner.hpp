@@ -9,8 +9,8 @@ class Runner
     private :
         Char _char;
         Obstacle _obstacle;
-        sf::Texture _textureObstacle;
-        sf::Sprite _spriteObstacle;
+        /*sf::Texture _textureObstacle;
+        sf::Sprite _spriteObstacle;*/
         sf::Time _elapsedTime;
         sf::Time _elapsedTimeCollision;
         sf::Time _elapsedTimeObstacle;

@@ -5,11 +5,14 @@ class Char
 {
     private:
         sf::Texture _texture;
-        sf::Sprite _sprite;
+        sf::Sprite _spriteRunning[CHAR_FRAME_NUMBER];
+        sf::Sprite _spriteJumping[JUMPING_FRAME_NUMBER];
+        int _currentFrame;
         pos _pos;
         int _speedY;
         bool _isJumping;
         sf::Time _elapsedTime;
+        sf::Time _animationElapsedTime;
 
     public:
         Char();

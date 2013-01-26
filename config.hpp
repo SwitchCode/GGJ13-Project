@@ -12,6 +12,8 @@
 #define WINDOW_HEIGHT 600
 
 #define HEARTS_NUMBER 7
+#define CHAR_FRAME_NUMBER 16
+#define JUMPING_FRAME_NUMBER 20
 
 #define ACCELERATION 1
 #define V0 20
@@ -19,7 +21,7 @@
 #define CHAR_WIDTH 70
 #define CHAR_HEIGHT 110
 
-#define OBSTACLE_WIDTH 100
+#define OBSTACLE_WIDTH 50
 #define OBSTACLE_HEIGHT 100
 
 #define SCALE 1.f
