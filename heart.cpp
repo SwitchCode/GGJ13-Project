@@ -2,7 +2,7 @@
 
 #include "heart.hpp"
 
-Heart::Heart() : _currentLife(0), _currentCombos(COMBOS_NUMBER - 1), _isAlive(true)
+Heart::Heart() : _currentLife(HEARTS_NUMBER - 1), _currentCombos(0), _isAlive(true)
 {
 }
 
@@ -67,26 +67,26 @@ void Heart::beatWave()
 
 void Heart::losePieceOfHeart()
 {
-    _currentLife++;
-    if(_currentLife >= HEARTS_NUMBER - 1)
+    _currentLife--;
+    if(_currentLife <= 0)
     {
-        _currentLife = HEARTS_NUMBER - 1;
+        _currentLife = 0;
         _isAlive = false;
     }
 }
 
 void Heart::breakCombo()
 {
-    _currentCombos = COMBOS_NUMBER - 1;
+    _currentCombos = 0;
 }
 
 void Heart::hitCombo()
 {
-    _currentCombos--;
-    if(_currentCombos <= 0)
+    _currentCombos++;
+    if(_currentCombos >= COMBOS_NUMBER - 1)
     {
-        _currentCombos = COMBOS_NUMBER - 1;
-        _currentLife--;
+        _currentCombos = 0;
+        _currentLife++;
     }
 }
 
