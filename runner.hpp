@@ -13,6 +13,7 @@ class Runner
         sf::Sprite _spriteObstacle;
         sf::Time _elapsedTime;
         sf::Time _elapsedTimeCollision;
+        sf::Time _elapsedTimeObstacle;
         bool collision;
     public :
         Runner();

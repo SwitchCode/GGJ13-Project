@@ -58,10 +58,15 @@ void Runner::update(sf::Time elapsedTime)
     {
         if(!_char.getIsJumping())
             _char.jump();
-        if(!_obstacle.isLaunched())
-            _obstacle.launch(10);
 
         _elapsedTime = sf::milliseconds(0);
+    }
+
+    _elapsedTimeObstacle += elapsedTime;
+    if(!_obstacle.isLaunched() and _elapsedTimeObstacle > sf::milliseconds(1000))
+    {
+        _elapsedTimeObstacle = sf::milliseconds(0);
+        _obstacle.launch(25);
     }
     _char.update(elapsedTime);
     _obstacle.update(elapsedTime);
