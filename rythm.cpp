@@ -3,7 +3,7 @@
 #include "game.hpp"
 #include "rythm.hpp"
 
-Rythm::Rythm()
+Rythm::Rythm() : _deltaBeat(sf::seconds(1))
 {
 }
 
@@ -25,17 +25,13 @@ bool Rythm::init()
     if(!_waveO.loadFromFile(IMAGES_PATH"rythm/wave.png"))
         return false;
 
-    // TEST
-    Wave *waveTest = new Wave();
-    waveTest->init(_waveO);
-    _waves.push_back(waveTest);
-    // TEST
-
     return true;
 }
 
 void Rythm::update(sf::Time elapsedTime)
 {
+    generateWaves(elapsedTime);
+
     for(std::list<Wave*>::iterator it = _waves.begin() ; it != _waves.end() ; ++it)
     {
         if(!(*it)->isAlive())
@@ -72,6 +68,20 @@ void Rythm::draw(sf::RenderWindow &app)
 void Rythm::hurted()
 {
     _heart.losePieceOfHeart();
+}
+
+void Rythm::generateWaves(sf::Time elapsedTime)
+{
+    _elapsedTimeBeat += elapsedTime;
+
+    if(_elapsedTimeBeat >= _deltaBeat)
+    {
+        Wave *wave = new Wave();
+        wave->init(_waveO);
+        _waves.push_back(wave);
+
+        _elapsedTimeBeat = _elapsedTimeBeat.Zero;
+    }
 }
 
 void Rythm::beatWave()
