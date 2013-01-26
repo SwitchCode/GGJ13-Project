@@ -1,6 +1,8 @@
 #ifndef RYTHM_HPP
 #define RYTHM_HPP
 
+#include "heart.hpp"
+
 class Rythm
 {
     public:
@@ -14,6 +16,8 @@ class Rythm
     private:
         sf::Texture _backgroundO;
         sf::Sprite _background;
+
+        Heart _heart;
 };
 
 #endif
