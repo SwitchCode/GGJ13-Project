@@ -34,8 +34,11 @@ void Rythm::update(sf::Time elapsedTime)
 
     for(std::list<Wave*>::iterator it = _waves.begin() ; it != _waves.end() ; ++it)
     {
-        if(!(*it)->isAlive())
+        if(!(*it)->isAlive() || (*it)->isMissed())
         {
+            if((*it)->isMissed())
+                hurted();
+
             delete *it;
             it = _waves.erase(it);
         }

@@ -14,12 +14,13 @@ class Wave
         void die();
 
         bool isAlive();
+        bool isMissed();
         sf::Rect<float> getRect();
 
     private:
         sf::Sprite _sprite;
         sf::Time _elapsedTime;
-        bool _isAlive;
+        bool _isAlive, _isMissed;
 };
 
 #endif
