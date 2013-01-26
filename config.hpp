@@ -2,6 +2,7 @@
 #define CONFIG_HPP
 
 #include <iostream>
+#include <sstream>
 #include <list>
 
 #include "SFML/Window.hpp"
@@ -24,6 +25,7 @@
 #define SCALE 1.f
 
 #define IMAGES_PATH "data/images/"
+#define FONTS_PATH "data/fonts/"
 
 bool AABBvSAABB(sf::Rect<float> rect1, sf::Rect<float> rect2);
 
@@ -33,6 +35,7 @@ struct pos
     int y;
 };
 
+std::string toString(int n);
 
 #endif
 

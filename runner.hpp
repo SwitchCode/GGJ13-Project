@@ -14,8 +14,15 @@ class Runner
         sf::Time _elapsedTime;
         sf::Time _elapsedTimeCollision;
         sf::Time _elapsedTimeObstacle;
+        sf::Time _totalElapsedTime;
+        sf::Time _elapsedTimeScore;
+        sf::Font _font;
+        sf::Text _textScore;
+        int _score;
         bool _collision;
         bool _effort;
+        int _speedChar;
+        int _delaiObstacle;
     public :
         Runner();
         bool init();

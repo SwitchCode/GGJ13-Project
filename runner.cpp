@@ -2,29 +2,21 @@
 #include "runner.hpp"
 
 
-Runner::Runner()
+Runner::Runner() : _collision(false), _effort(false), _speedChar(5), _delaiObstacle(5000), _score(0)
 {
 }
 
 bool Runner::init()
 {
-    /*if (!_textureObstacle.loadFromFile(IMAGES_PATH"runner/obstacle.png"))
-    {
+    if(!_char.init() or !_obstacle.init() or  !_font.loadFromFile(FONTS_PATH"arial.ttf"))
         return false;
+    else
+    {
+        _textScore.setString(toString(_score) + " meters");
+        _textScore.setFont(_font);
+        _textScore.setColor(sf::Color(0, 0, 0));
+        return true;
     }
-    else
-    {
-        _spriteObstacle.setTexture(_textureObstacle);
-        return true;
-    }*/
-
-    if(!_char.init() or !_obstacle.init())
-        return false;
-    else
-        return true;
-
-    _collision = false;
-    _effort = false;
 }
 
 bool Runner::verifyCollision(sf::Time elapsedTime)
@@ -74,17 +66,35 @@ void Runner::update(sf::Time elapsedTime)
         _effort = false;
 
     _elapsedTimeObstacle += elapsedTime;
-    if(!_obstacle.isLaunched() and _elapsedTimeObstacle > sf::milliseconds(1000))
+    if(!_obstacle.isLaunched() and _elapsedTimeObstacle > sf::milliseconds(_delaiObstacle))
     {
         _elapsedTimeObstacle = sf::milliseconds(0);
-        _obstacle.launch(25);
+        _obstacle.launch(_speedChar);
     }
+
+    _totalElapsedTime += elapsedTime;
+    if(_totalElapsedTime > sf::seconds(8))
+    {
+        _delaiObstacle -= 500;
+        _speedChar += 2;
+        _totalElapsedTime = sf::milliseconds(0);
+    }
+
+    _elapsedTimeScore += elapsedTime;
+    if(_elapsedTimeScore > sf::milliseconds(10000/_speedChar))
+    {
+        _score ++;
+        _elapsedTimeScore = sf::milliseconds(0);
+    }
+
+    _textScore.setString(toString(_score) + " meters");
     _char.update(elapsedTime);
     _obstacle.update(elapsedTime);
 }
 
 void Runner::draw(sf::RenderWindow &window)
 {
+    window.draw(_textScore);
     _char.draw(window);
     _obstacle.draw(window);
 }

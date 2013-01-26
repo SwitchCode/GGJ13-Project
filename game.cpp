@@ -28,7 +28,6 @@ void Game::start()
     else if(!_runner.init())
         _gameState = Game::Exiting;
 
-
     while(!isExiting())
     {
         gameLoop();
