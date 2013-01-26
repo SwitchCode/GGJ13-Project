@@ -3,7 +3,7 @@
 #include "game.hpp"
 #include "rythm.hpp"
 
-Rythm::Rythm() : _deltaBeat(sf::seconds(1))
+Rythm::Rythm() : _deltaBeat(DELTA_GENERATE_TIME_WAVES), _deltaTimeWaves(DELTA_TIME_WAVES)
 {
 }
 
@@ -47,7 +47,7 @@ void Rythm::update(sf::Time elapsedTime)
     _elapsedTime += elapsedTime;
     for(std::list<Wave*>::const_iterator it = _waves.begin() ; it != _waves.end() ; ++it)
     {
-        (*it)->update(elapsedTime);
+        (*it)->update(elapsedTime, _deltaTimeWaves);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && _elapsedTime > sf::milliseconds(100))
     {
@@ -71,6 +71,37 @@ void Rythm::draw(sf::RenderWindow &app)
 void Rythm::hurted()
 {
     _heart.losePieceOfHeart();
+}
+
+void Rythm::accelerate()
+{
+    sf::Time deltaTimeGWaves = DELTA_GENERATE_TIME_WAVES;
+    if(_deltaBeat.asMilliseconds() > deltaTimeGWaves.asMilliseconds() / 3)
+        _deltaBeat = sf::milliseconds(3 * _deltaBeat.asMilliseconds() / 4);
+
+    sf::Time deltaTimeWaves = DELTA_TIME_WAVES;
+    if(_deltaTimeWaves.asMilliseconds() > deltaTimeWaves.asMilliseconds() / 4)
+        _deltaTimeWaves = sf::milliseconds(_deltaTimeWaves.asMilliseconds() / 2);
+}
+
+void Rythm::decelerate(sf::Time elapsedTime)
+{
+    _elapsedTimeAccelerate += elapsedTime;
+    _elapsedTimeWaves += elapsedTime;
+
+    if(_deltaBeat < DELTA_GENERATE_TIME_WAVES && _elapsedTimeAccelerate > sf::milliseconds(100))
+    {
+        _deltaBeat = sf::milliseconds(100 * _deltaBeat.asMilliseconds() / 99);
+        _elapsedTimeAccelerate = _elapsedTimeAccelerate.Zero;
+    }
+
+    if(_deltaTimeWaves < DELTA_TIME_WAVES && _elapsedTimeWaves > sf::seconds(10))
+    {
+        _deltaTimeWaves = sf::milliseconds(_deltaTimeWaves.asMilliseconds() * 2);
+        if(_deltaTimeWaves > DELTA_TIME_WAVES)
+            _deltaTimeWaves = DELTA_TIME_WAVES;
+        _elapsedTimeWaves = _elapsedTimeWaves.Zero;
+    }
 }
 
 void Rythm::generateWaves(sf::Time elapsedTime)

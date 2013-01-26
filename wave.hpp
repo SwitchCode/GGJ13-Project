@@ -8,7 +8,7 @@ class Wave
         ~Wave();
 
         bool init(sf::Texture &texture);
-        void update(sf::Time elapsedTime);
+        void update(sf::Time elapsedTime, sf::Time deltaTimeWaves);
         void draw(sf::RenderWindow &app);
 
         void die();

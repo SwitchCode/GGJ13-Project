@@ -17,7 +17,7 @@ void Game::start()
     if(_gameState != Uninitialized)
         return;
 
-    _mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "GGJ13-Project");
+    _mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Heart of Jump");
 
     _gameState = Game::Playing;
 
@@ -72,10 +72,11 @@ void Game::updateAll()
     _rythm.update(elapsed);
     _runner.update(elapsed);
     if(_runner.verifyCollision(elapsed))
-    {
         _rythm.hurted();
-    }
-
+    if(_runner.verifyEffort())
+        _rythm.accelerate();
+    else
+        _rythm.decelerate(elapsed);
 }
 
 void Game::drawAll()

@@ -16,10 +16,10 @@ bool Wave::init(sf::Texture &texture)
     _sprite.setPosition(WINDOW_WIDTH - _sprite.getGlobalBounds().width, - _sprite.getGlobalBounds().height);
 }
 
-void Wave::update(sf::Time elapsedTime)
+void Wave::update(sf::Time elapsedTime, sf::Time deltaTimeWaves)
 {
     _elapsedTime += elapsedTime;
-    if(_elapsedTime > sf::milliseconds(10))
+    if(_elapsedTime > deltaTimeWaves)
     {
         _sprite.move(0, 1);
         if(_sprite.getPosition().y > WINDOW_HEIGHT)
