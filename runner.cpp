@@ -23,7 +23,8 @@ bool Runner::init()
     else
         return true;
 
-    collision = false;
+    _collision = false;
+    _effort = false;
 }
 
 bool Runner::verifyCollision(sf::Time elapsedTime)
@@ -33,12 +34,12 @@ bool Runner::verifyCollision(sf::Time elapsedTime)
     sf::Rect<float> obj2(_obstacle.getPosX(), _obstacle.getPosY(), CHAR_WIDTH, CHAR_HEIGHT);
 
     if(_elapsedTimeCollision > sf::milliseconds(1000))
-        collision = false;
+        _collision = false;
 
-    if(AABBvSAABB(obj1, obj2) and !collision)
+    if(AABBvSAABB(obj1, obj2) and !_collision)
     {
         _elapsedTimeCollision = sf::milliseconds(0);
-        collision = true;
+        _collision = true;
         return true;
     }
     else
@@ -46,9 +47,12 @@ bool Runner::verifyCollision(sf::Time elapsedTime)
         return false;
     }
 
-
-
     return AABBvSAABB(obj1, obj2);
+}
+
+bool Runner::verifyEffort()
+{
+    return _effort;
 }
 
 void Runner::update(sf::Time elapsedTime)
@@ -57,10 +61,17 @@ void Runner::update(sf::Time elapsedTime)
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && _elapsedTime > sf::milliseconds(100))
     {
         if(!_char.getIsJumping())
+        {
             _char.jump();
+            _effort = true;
+        }
+        else
+            _effort = false;
 
         _elapsedTime = sf::milliseconds(0);
     }
+    else
+        _effort = false;
 
     _elapsedTimeObstacle += elapsedTime;
     if(!_obstacle.isLaunched() and _elapsedTimeObstacle > sf::milliseconds(1000))

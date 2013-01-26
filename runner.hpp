@@ -14,11 +14,13 @@ class Runner
         sf::Time _elapsedTime;
         sf::Time _elapsedTimeCollision;
         sf::Time _elapsedTimeObstacle;
-        bool collision;
+        bool _collision;
+        bool _effort;
     public :
         Runner();
         bool init();
         bool verifyCollision(sf::Time elapsedTime);
+        bool verifyEffort();
         void update(sf::Time elapsedTime);
         void draw(sf::RenderWindow &window);
 };
