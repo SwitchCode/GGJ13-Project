@@ -16,6 +16,7 @@ class Wave
         bool isAlive();
         bool isMissed();
         sf::Rect<float> getRect();
+        sf::Vector2f getPosition();
 
     private:
         sf::Sprite _sprite;

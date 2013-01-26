@@ -78,10 +78,6 @@ void Rythm::hurted()
 
 void Rythm::accelerate()
 {
-    sf::Time deltaTimeGWaves = DELTA_GENERATE_TIME_WAVES;
-    if(_deltaBeat.asMilliseconds() > deltaTimeGWaves.asMilliseconds() / 3)
-        _deltaBeat = sf::milliseconds(3 * _deltaBeat.asMilliseconds() / 4);
-
     sf::Time deltaTimeWaves = DELTA_TIME_WAVES;
     if(_deltaTimeWaves.asMilliseconds() > deltaTimeWaves.asMilliseconds() / 4)
         _deltaTimeWaves = sf::milliseconds(_deltaTimeWaves.asMilliseconds() / 2);
@@ -89,14 +85,7 @@ void Rythm::accelerate()
 
 void Rythm::decelerate(sf::Time elapsedTime)
 {
-    _elapsedTimeAccelerate += elapsedTime;
     _elapsedTimeWaves += elapsedTime;
-
-    if(_deltaBeat < DELTA_GENERATE_TIME_WAVES && _elapsedTimeAccelerate > sf::milliseconds(100))
-    {
-        _deltaBeat = sf::milliseconds(100 * _deltaBeat.asMilliseconds() / 99);
-        _elapsedTimeAccelerate = _elapsedTimeAccelerate.Zero;
-    }
 
     if(_deltaTimeWaves < DELTA_TIME_WAVES && _elapsedTimeWaves > sf::seconds(10))
     {
@@ -111,7 +100,18 @@ void Rythm::generateWaves(sf::Time elapsedTime)
 {
     _elapsedTimeBeat += elapsedTime;
 
-    if(_elapsedTimeBeat >= _deltaBeat)
+    if(!_waves.empty())
+    {
+        if(_waves.back()->getPosition().y > _waves.back()->getRect().height)
+        {
+            Wave *wave = new Wave();
+            wave->init(_waveO);
+            _waves.push_back(wave);
+
+            _elapsedTimeBeat = _elapsedTimeBeat.Zero;
+        }
+    }
+    else
     {
         Wave *wave = new Wave();
         wave->init(_waveO);

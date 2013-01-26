@@ -30,7 +30,7 @@
 #define IMAGES_PATH "data/images/"
 #define FONTS_PATH "data/fonts/"
 
-#define DELTA_GENERATE_TIME_WAVES sf::seconds(2)
+#define DELTA_GENERATE_TIME_WAVES sf::seconds(1)
 #define DELTA_TIME_WAVES sf::milliseconds(10)
 
 bool AABBvSAABB(sf::Rect<float> rect1, sf::Rect<float> rect2);

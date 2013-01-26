@@ -54,3 +54,8 @@ sf::Rect<float> Wave::getRect()
 {
     return _sprite.getGlobalBounds();
 }
+
+sf::Vector2f Wave::getPosition()
+{
+    return _sprite.getPosition();
+}
