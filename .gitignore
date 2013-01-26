@@ -16,3 +16,4 @@
 *.cbp
 bin/
 *.depend
+*.layout

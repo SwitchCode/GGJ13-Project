@@ -1,5 +1,6 @@
 #include "config.hpp"
 
+#include "game.hpp"
 #include "rythm.hpp"
 
 Rythm::Rythm()
@@ -23,8 +24,15 @@ bool Rythm::init()
     return true;
 }
 
-void Rythm::update()
+void Rythm::update(sf::Time elapsedTime)
 {
+    _elapsedTime += elapsedTime;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && _elapsedTime > sf::milliseconds(100))
+    {
+        _heart.losePieceOfHeart(); // just a test
+        // check here if there is a wave
+        _elapsedTime = sf::milliseconds(0);
+    }
     _heart.update();
 }
 

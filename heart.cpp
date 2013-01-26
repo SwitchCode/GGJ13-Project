@@ -2,7 +2,7 @@
 
 #include "heart.hpp"
 
-Heart::Heart()
+Heart::Heart() : _currentHeart(0), _isAlive(true)
 {
 }
 
@@ -33,7 +33,27 @@ void Heart::update()
 
 void Heart::draw(sf::RenderWindow &app)
 {
-    _sprite[/*current*/0].setPosition(WINDOW_WIDTH - _sprite[/*current*/0].getGlobalBounds().width,
-                           WINDOW_HEIGHT - (1.5 * _sprite[/*current*/0].getGlobalBounds().height));
-    app.draw(_sprite[/*current*/0]);
+    _sprite[_currentHeart].setPosition(WINDOW_WIDTH - _sprite[_currentHeart].getGlobalBounds().width,
+                           WINDOW_HEIGHT - (1.5 * _sprite[_currentHeart].getGlobalBounds().height));
+    app.draw(_sprite[_currentHeart]);
+}
+
+void Heart::losePieceOfHeart()
+{
+    _currentHeart++;
+    if(_currentHeart >= HEARTS_NUMBER - 1)
+    {
+        _currentHeart = HEARTS_NUMBER - 1;
+        _isAlive = false;
+    }
+}
+
+int Heart::getCurrentHeart()
+{
+    return _currentHeart;
+}
+
+bool Heart::isAlive()
+{
+    return _isAlive;
 }

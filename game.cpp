@@ -68,7 +68,9 @@ void Game::gameLoop()
 
 void Game::updateAll()
 {
-    _rythm.update();
+    sf::Time elapsed = _clock.restart();
+
+    _rythm.update(elapsed);
     _runner.update();
 }
 
