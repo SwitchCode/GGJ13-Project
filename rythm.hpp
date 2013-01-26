@@ -16,11 +16,12 @@ class Rythm
         void hurted();
 
         void beatWave();
+        void generateWaves(sf::Time elapsedTime);
 
     private:
         sf::Texture _backgroundO, _waveO;
         sf::Sprite _background;
-        sf::Time _elapsedTime;
+        sf::Time _elapsedTime, _deltaBeat, _elapsedTimeBeat;
 
         Heart _heart;
         std::list<Wave*> _waves;
