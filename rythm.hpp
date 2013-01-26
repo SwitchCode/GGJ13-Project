@@ -13,6 +13,7 @@ class Rythm
         bool init();
         void update(sf::Time elapsedTime);
         void draw(sf::RenderWindow &app);
+        void hurted();
 
         void beatWave();
 

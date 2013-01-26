@@ -69,6 +69,11 @@ void Rythm::draw(sf::RenderWindow &app)
     _heart.draw(app);
 }
 
+void Rythm::hurted()
+{
+    _heart.losePieceOfHeart();
+}
+
 void Rythm::beatWave()
 {
     bool beat = false;

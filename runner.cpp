@@ -1,6 +1,7 @@
 #include "config.hpp"
 #include "runner.hpp"
 
+
 Runner::Runner()
 {
 }
@@ -17,10 +18,37 @@ bool Runner::init()
         return true;
     }*/
 
-    if(!_char.init())
+    if(!_char.init() or !_obstacle.init())
         return false;
     else
         return true;
+
+    collision = false;
+}
+
+bool Runner::verifyCollision(sf::Time elapsedTime)
+{
+    _elapsedTimeCollision += elapsedTime;
+    sf::Rect<float> obj1(_char.getPosX(), _char.getPosY(), CHAR_WIDTH, CHAR_HEIGHT);
+    sf::Rect<float> obj2(_obstacle.getPosX(), _obstacle.getPosY(), CHAR_WIDTH, CHAR_HEIGHT);
+
+    if(_elapsedTimeCollision > sf::milliseconds(1000))
+        collision = false;
+
+    if(AABBvSAABB(obj1, obj2) and !collision)
+    {
+        _elapsedTimeCollision = sf::milliseconds(0);
+        collision = true;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
+
+
+    return AABBvSAABB(obj1, obj2);
 }
 
 void Runner::update(sf::Time elapsedTime)
@@ -30,13 +58,17 @@ void Runner::update(sf::Time elapsedTime)
     {
         if(!_char.getIsJumping())
             _char.jump();
+        if(!_obstacle.isLaunched())
+            _obstacle.launch(10);
 
         _elapsedTime = sf::milliseconds(0);
     }
     _char.update(elapsedTime);
+    _obstacle.update(elapsedTime);
 }
 
 void Runner::draw(sf::RenderWindow &window)
 {
     _char.draw(window);
+    _obstacle.draw(window);
 }

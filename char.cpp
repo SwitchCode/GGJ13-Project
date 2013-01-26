@@ -20,6 +20,7 @@ bool Char::init()
     }
 
     _speedY = 0;
+    _isJumping = false;
 }
 
 int Char::getPosX()

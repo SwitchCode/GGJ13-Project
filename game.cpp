@@ -72,12 +72,17 @@ void Game::updateAll()
 
     _rythm.update(elapsed);
     _runner.update(elapsed);
+    if(_runner.verifyCollision(elapsed))
+    {
+        _rythm.hurted();
+    }
+
 }
 
 void Game::drawAll()
 {
-    _rythm.draw(_mainWindow);
     _runner.draw(_mainWindow);
+    _rythm.draw(_mainWindow);
 }
 
 sf::RenderWindow& Game::getWindow()
