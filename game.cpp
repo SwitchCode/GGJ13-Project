@@ -71,7 +71,7 @@ void Game::updateAll()
     sf::Time elapsed = _clock.restart();
 
     _rythm.update(elapsed);
-    _runner.update();
+    _runner.update(elapsed);
 }
 
 void Game::drawAll()
