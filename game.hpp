@@ -1,6 +1,8 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+#include "rythm.hpp"
+
 class Game
 {
     public:
@@ -24,6 +26,8 @@ class Game
         static sf::RenderWindow _mainWindow;
         static sf::Event _currentEvent;
         static sf::Clock _clock;
+
+        static Rythm _rythm;
 };
 
 #endif

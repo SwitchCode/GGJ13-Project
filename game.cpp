@@ -1,5 +1,6 @@
 #include "config.hpp"
 
+#include "rythm.hpp"
 #include "game.hpp"
 
 Game::Game()
@@ -20,6 +21,9 @@ void Game::start()
     _gameState = Game::Playing;
 
     _mainWindow.setVerticalSyncEnabled(true);
+
+    if(!_rythm.init())
+        _gameState = Game::Exiting;
 
     while(!isExiting())
     {
@@ -60,12 +64,12 @@ void Game::gameLoop()
 
 void Game::updateAll()
 {
-    // updates here
+    _rythm.update();
 }
 
 void Game::drawAll()
 {
-    // draw here
+    _rythm.draw(_mainWindow);
 }
 
 sf::RenderWindow& Game::getWindow()
@@ -82,3 +86,5 @@ Game::GameState Game::_gameState = Uninitialized;
 sf::RenderWindow Game::_mainWindow;
 sf::Event Game::_currentEvent;
 sf::Clock Game::_clock;
+
+Rythm Game::_rythm;
