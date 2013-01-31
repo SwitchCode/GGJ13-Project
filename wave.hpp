@@ -8,6 +8,7 @@ class Wave
         ~Wave();
 
         bool init(sf::Texture &texture);
+        bool init(bool retry = false);
         void update(sf::Time elapsedTime, sf::Time deltaTimeWaves);
         void draw(sf::RenderWindow &app);
 
@@ -16,6 +17,7 @@ class Wave
         bool isAlive();
         bool isMissed();
         sf::Rect<float> getRect();
+        sf::Vector2f getPosition();
 
     private:
         sf::Sprite _sprite;

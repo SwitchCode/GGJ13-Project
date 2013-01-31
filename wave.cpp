@@ -14,6 +14,15 @@ bool Wave::init(sf::Texture &texture)
 {
     _sprite.setTexture(texture);
     _sprite.setPosition(WINDOW_WIDTH - _sprite.getGlobalBounds().width, - _sprite.getGlobalBounds().height);
+
+    return true;
+}
+
+bool Wave::init(bool retry)
+{
+    _sprite.setPosition(WINDOW_WIDTH - _sprite.getGlobalBounds().width, - _sprite.getGlobalBounds().height);
+
+    return true;
 }
 
 void Wave::update(sf::Time elapsedTime, sf::Time deltaTimeWaves)
@@ -53,4 +62,9 @@ bool Wave::isMissed()
 sf::Rect<float> Wave::getRect()
 {
     return _sprite.getGlobalBounds();
+}
+
+sf::Vector2f Wave::getPosition()
+{
+    return _sprite.getPosition();
 }

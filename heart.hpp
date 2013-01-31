@@ -7,11 +7,13 @@ class Heart
         Heart();
         ~Heart();
 
-        bool init();
+        bool init(bool retry = false);
         void update();
         void draw(sf::RenderWindow &app);
 
         void losePieceOfHeart();
+        void breakCombo();
+        void hitCombo();
         void beatWave();
         int getCurrentHeart();
         sf::Rect<float> getRect();
@@ -19,8 +21,8 @@ class Heart
 
     private:
         sf::Texture _hearts;
-        sf::Sprite _sprite[HEARTS_NUMBER];
-        int _currentHeart;
+        sf::Sprite _spriteLife[HEARTS_NUMBER], _spriteCombos[COMBOS_NUMBER];
+        int _currentLife, _currentCombos;
         bool _isAlive;
 };
 

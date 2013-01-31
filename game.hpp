@@ -20,13 +20,20 @@ class Game
 
         static void updateAll();
         static void drawAll();
+        static void drawScores();
+        static void easterEgg();
+        static void splashscreen();
 
-        enum GameState { Uninitialized, Paused, Playing, Exiting };
+        enum GameState { Uninitialized, Paused, Splashscreen, Playing, Ending, Exiting };
 
         static GameState _gameState;
         static sf::RenderWindow _mainWindow;
         static sf::Event _currentEvent;
         static sf::Clock _clock;
+        static std::string _easterEgg;
+        static sf::Time _elapsedEaster;
+        static sf::Texture _texture;
+        static sf::Sprite _endImg;
 
         static Rythm _rythm;
         static Runner _runner;

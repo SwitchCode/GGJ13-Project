@@ -5,20 +5,34 @@ Obstacle::Obstacle()
 {
 }
 
-bool Obstacle::init()
+bool Obstacle::init(bool retry)
 {
-    if (!_texture.loadFromFile(IMAGES_PATH"runner/obstacle.png"))
-    {
-        return false;
-    }
-    else
-    {
-        _sprite.setTexture(_texture);
-        _pos.x = WINDOW_WIDTH - 100;
-        _pos.y = WINDOW_HEIGHT - OBSTACLE_HEIGHT;
-        return true;
-    }
+    _pos.x = WINDOW_WIDTH;
+    _pos.y = WINDOW_HEIGHT - OBSTACLE_HEIGHT - 20;
     _launched = false;
+
+    if(!retry)
+    {
+        if (!_texture1.loadFromFile(IMAGES_PATH"runner/barriere.png") ||
+            !_texture2.loadFromFile(IMAGES_PATH"runner/haie.png") ||
+            !_texture3.loadFromFile(IMAGES_PATH"runner/rocher.png") ||
+            !_texture4.loadFromFile(IMAGES_PATH"runner/poubelle.png") ||
+            !_texture5.loadFromFile(IMAGES_PATH"runner/bouche-incendie.png"))
+        {
+            return false;
+        }
+        else
+        {
+            _sprite1.setTexture(_texture1);
+            _sprite2.setTexture(_texture2);
+            _sprite3.setTexture(_texture3);
+            _sprite4.setTexture(_texture4);
+            _sprite5.setTexture(_texture5);
+            _sprite = _sprite1;
+        }
+    }
+
+    return true;
 }
 
 int Obstacle::getPosX()
@@ -55,6 +69,20 @@ void Obstacle::launch(int speedX)
 {
     _launched = true;
     _speedX = speedX;
+}
+
+void Obstacle::changeImage(int numImage)
+{
+    if(numImage == 1)
+        _sprite = _sprite1;
+    else if(numImage == 2)
+        _sprite = _sprite2;
+    else if(numImage == 3)
+        _sprite = _sprite3;
+    else if(numImage == 4)
+        _sprite = _sprite4;
+    else
+        _sprite = _sprite5;
 }
 
 bool Obstacle::isLaunched()

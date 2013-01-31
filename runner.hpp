@@ -3,14 +3,19 @@
 
 #include "char.hpp"
 #include "obstacle.hpp"
+#include "background.hpp"
 
 class Runner
 {
     private :
         Char _char;
         Obstacle _obstacle;
-        sf::Texture _textureObstacle;
-        sf::Sprite _spriteObstacle;
+        Background _background1;
+        Background _background2;
+        Background _background3;
+        Background _background4;
+        sf::Texture _texture;
+        sf::Sprite _spriteChoc;
         sf::Time _elapsedTime;
         sf::Time _elapsedTimeCollision;
         sf::Time _elapsedTimeObstacle;
@@ -25,11 +30,12 @@ class Runner
         int _delaiObstacle;
     public :
         Runner();
-        bool init();
+        bool init(bool retry = false);
         bool verifyCollision(sf::Time elapsedTime);
         bool verifyEffort();
         void update(sf::Time elapsedTime);
         void draw(sf::RenderWindow &window);
+        int getScore();
 };
 
 
