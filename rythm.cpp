@@ -67,7 +67,10 @@ void Rythm::update(sf::Time elapsedTime)
         if(!(*it)->isAlive() || (*it)->isMissed())
         {
             if((*it)->isMissed())
+            {
                 hurted();
+                _heart.breakCombo();
+            }
 
             delete *it;
             it = _waves.erase(it);
@@ -207,6 +210,10 @@ void Rythm::beatWave()
             }
 
             break;
+        }
+        else
+        {
+            _heart.breakCombo();
         }
     }
 
